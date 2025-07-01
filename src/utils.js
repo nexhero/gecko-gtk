@@ -5,20 +5,16 @@ export function open_default_terminal(env) {
     Gio._promisify(Gio.Subprocess.prototype, 'communicate_utf8_async');
 
     let terminal = GLib.getenv("TERMINAL");
-    console.log(`terminal: ${terminal}`)
+
     if (terminal) {
         try {
             Gio.Subprocess.new([terminal,'fish','-c',`gecko -a ${env};fish`], Gio.SubprocessFlags.NONE);
         } catch (err) {
-            // Do something
+            Gio.Subprocess.new(['gnome-terminal','fish','-c',`gecko -a ${env};fish`], Gio.SubprocessFlags.NONE);
         }
 
         return;
     }
-
-    // Try default app for 'x-scheme-handler/terminal'
-    // Not usually registered, so fallback to known names
-    // open_terminal();
 }
 
 export async function removeEnv(envName){
@@ -26,7 +22,7 @@ export async function removeEnv(envName){
 
     try {
         const proc = Gio.Subprocess.new(
-            ['gecko','-r',envName],
+            ['fish','-c',`gecko -r ${envName}`],
             Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE);
 
         const [stdout, stderr] = await proc.communicate_utf8_async(null,null);

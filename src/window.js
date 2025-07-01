@@ -3,13 +3,13 @@ import Gtk from 'gi://Gtk';
 import Adw from 'gi://Adw';
 import GLib from 'gi://GLib';
 import Gio from 'gi://Gio'
-import {removeEnv, open_default_terminal} from './utils.js'
+import {listEnv,removeEnv, open_default_terminal} from './utils.js'
 export const GeckoEnvItem = GObject.registerClass({
   GTypeName:'GeckoEnvItem',
   Template: 'file://' + GLib.get_current_dir() + '/src/templates/geck_env_item.ui',
   InternalChildren:['GeckoEnvItemLabel','GeckoEnvItemButton']
 }, class GeckoEnvItem extends Gtk.Grid {
-  constructor(label,params = {}) {
+  constructor(label,callback=()=>{},params = {}) {
     super(params);
     this._GeckoEnvItemLabel.set_label(label)
 
@@ -26,6 +26,7 @@ export const GeckoEnvItem = GObject.registerClass({
     const removeAction = new Gio.SimpleAction({ name: 'remove' });
     removeAction.connect('activate', async() => {
       await removeEnv(label)
+      callback()
       print(`Removed ${label}`);
     });
 
@@ -44,8 +45,19 @@ export const GeckoGtkWindow = GObject.registerClass({
     super._init(params);
 
   }
+  reset(){
+    this._env_list.remove_all()
+  }
+  listAll(){
+    this._env_list.remove_all()
+    listEnv().then((r)=>{
+        for (const e of r) {
+            this.addEnvItem(e)
+        }
+    })
+  }
   addEnvItem(envName) {
-    const env_item = new GeckoEnvItem(envName);
+    const env_item = new GeckoEnvItem(envName,this.listAll.bind(this));
     this._env_list.append(env_item);
   }
 });

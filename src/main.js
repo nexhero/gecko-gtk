@@ -13,11 +13,7 @@ app.connect('activate', () => {
     const win = new GeckoGtkWindow({ application: app });
     win.present();
 
-    listEnv().then((r)=>{
-        for (const e of r) {
-            win.addEnvItem(e)
-        }
-    })
+    win.listAll()
 });
 
 app.runAsync([]).catch(err=>console.log(err))
