@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.96.1 -->
+<interface>
+  <!-- interface-name gecko-gtk-window.ui -->
+  <requires lib="Adw" version="1.0"/>
+  <requires lib="gio" version="2.0"/>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="libadwaita" version="1.7"/>
+  <template class="GeckoEnvItem" parent="GtkGrid">
+    <property name="column-spacing">12</property>
+    <property name="halign">center</property>
+    <child>
+      <object class="GtkLabel" id="GeckoEnvItemLabel">
+        <property name="label">Python Env #1</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuButton" id="GeckoEnvItemButton">
+        <property name="menu-model">env_menu</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+  </template>
+  <menu id="env_menu">
+    <section>
+      <item>
+        <attribute name="action">env.open_terminal</attribute>
+        <attribute name="label">_Terminal</attribute>
+      </item>
+      <item>
+        <attribute name="action">env.remove</attribute>
+        <attribute name="label">_Delete</attribute>
+      </item>
+    </section>
+  </menu>
+</interface>
