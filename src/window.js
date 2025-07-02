@@ -4,6 +4,17 @@ import Adw from 'gi://Adw';
 import GLib from 'gi://GLib';
 import Gio from 'gi://Gio'
 import {listEnv,removeEnv, open_default_terminal} from './utils.js'
+
+export const GeckoNewDialog = GObject.registerClass({
+  GTypeName:'GeckoNewEnv',
+  Template: 'file://' + GLib.get_current_dir() + '/src/templates/geck_new_env.ui',
+  InternalChildren:[]
+},class GeckoNewDialog extends Adw.Dialog{
+  _init(params={}){
+    super._init(params)
+  }
+})
+
 export const GeckoEnvItem = GObject.registerClass({
   GTypeName:'GeckoEnvItem',
   Template: 'file://' + GLib.get_current_dir() + '/src/templates/geck_env_item.ui',
@@ -43,6 +54,17 @@ export const GeckoGtkWindow = GObject.registerClass({
 }, class GeckoGtkWindow extends Adw.ApplicationWindow {
   _init(params = {}) {
     super._init(params);
+
+    const app_group = new Gio.SimpleActionGroup()
+    this.insert_action_group('app',app_group)
+    const newEnvAction = new Gio.SimpleAction({name:'new'})
+    newEnvAction.connect('activate',()=>{
+      const dialog =  new GeckoNewDialog()
+      dialog.set_content_width(300)
+      dialog.present(this)
+      print(' creating new env')
+    })
+    app_group.add_action(newEnvAction)
 
   }
   reset(){

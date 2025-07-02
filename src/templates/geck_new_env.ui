@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.96.1 -->
+<interface>
+  <!-- interface-name gecko-gtk-window.ui -->
+  <requires lib="Adw" version="1.0"/>
+  <requires lib="gio" version="2.0"/>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="libadwaita" version="1.7"/>
+  <template class="GeckoNewEnv" parent="AdwDialog">
+    <property name="child">
+      <object class="AdwStatusPage">
+        <property name="description">Create a new python env</property>
+        <property name="title">New Python Env</property>
+      </object>
+    </property>
+  </template>
+</interface>

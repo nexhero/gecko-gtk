@@ -2,6 +2,6 @@
 <!DOCTYPE cambalache-project SYSTEM "cambalache-project.dtd">
 <!-- Created with Cambalache 0.96.1 -->
 <cambalache-project version="0.96.0" target_tk="gtk-4.0">
-  <ui template-class="GeckoGtkWindow" filename="window.ui" sha256="25d4990dc987050589aabecf27c51dadfb724c86c7b2fa0a9327f65deb9b7ecd"/>
+  <ui template-class="GeckoGtkWindow" filename="window.ui" sha256="98b579b066b57350fda6594f48a4e9de0ff5941d31ec2060b7ae593f0e786f95"/>
   <ui template-class="GeckoEnvItem" filename="templates/geck_env_item.ui" sha256="29535ea06a3dae6b458f42cad0d8f91c64d148ab0cde9b3320bec1daef546c24"/>
 </cambalache-project>

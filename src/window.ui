@@ -44,12 +44,8 @@
   <menu id="primary_menu">
     <section>
       <item>
-        <attribute name="action">app.preferences</attribute>
-        <attribute name="label" translatable="yes">_Preferences</attribute>
-      </item>
-      <item>
-        <attribute name="action">win.show-help-overlay</attribute>
-        <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
+        <attribute name="action">app.new</attribute>
+        <attribute name="label" translatable="yes">_New Env</attribute>
       </item>
       <item>
         <attribute name="action">app.about</attribute>
